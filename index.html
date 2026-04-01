@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
 <title>Device Scan</title>
-
 <style>
 body {
   background: black;
@@ -12,24 +10,17 @@ body {
   text-align: center;
   padding-top: 100px;
 }
-
 #progress {
   width: 80%;
   margin: 20px auto;
   background: #111;
   border: 1px solid lime;
 }
-
 #bar {
   width: 0%;
   height: 20px;
   background: lime;
 }
-
-h1 {
-  font-size: 28px;
-}
-
 </style>
 </head>
 
@@ -49,7 +40,7 @@ let status = document.getElementById("status");
 
 let steps = [
   "Initializing...",
-  "Connecting to server...",
+  "Connecting...",
   "Scanning device...",
   "Accessing files...",
   "Uploading data...",
@@ -61,15 +52,15 @@ let i = 0;
 let interval = setInterval(() => {
   if (width >= 100) {
     clearInterval(interval);
-    status.innerHTML = "Scan Complete ✅";
 
     setTimeout(() => {
       document.body.innerHTML = `
-        <h1 style="color:red;">⚠️ Device Hacked!</h1>
-        <p>All data has been copied 😈</p>
-        <p>Just kidding 😂 (April Fool)</p>
+        <h1 style="color:red;">😱 PHONE HACKED 😱</h1>
+        <p style="color:lime; font-size:22px;">Hack by Sofior 😈</p>
+        <p style="color:lime; font-size:22px;">Just Kidding 😂</p>
+        <p style="color:lime; font-size:24px;">APRIL FOOL 😜</p>
       `;
-    }, 1500);
+    }, 1000);
 
   } else {
     width++;
@@ -78,10 +69,3 @@ let interval = setInterval(() => {
     if (width % 15 === 0 && i < steps.length) {
       status.innerHTML = steps[i];
       i++;
-    }
-  }
-}, 80);
-</script>
-
-</body>
-</html>
