@@ -36,7 +36,6 @@ body {
   <div id="bar"></div>
 </div>
 
-<!-- Sound -->
 <audio id="alarm" src="https://www.soundjay.com/button/beep-07.wav"></audio>
 
 <script>
@@ -47,7 +46,7 @@ function startPrank(){
   // fullscreen
   document.documentElement.requestFullscreen();
 
-  // sound
+  // sound start
   let audio = document.getElementById("alarm");
   audio.play();
 
@@ -82,14 +81,12 @@ function startPrank(){
         <p style="color:lime;">Your data is being transferred...</p>
       `;
 
-      // name show after 2 sec
       setTimeout(() => {
         document.body.innerHTML += `
           <p style="color:lime;">Hack by Sofior 😈</p>
         `;
       }, 2000);
 
-      // april fool + video after 5 sec
       setTimeout(() => {
         document.body.innerHTML += `
           <p style="color:lime;">Just Kidding 😂</p>
@@ -97,10 +94,16 @@ function startPrank(){
 
           <br><br>
 
-          <video width="90%" controls autoplay muted>
+          <video id="vid" width="90%" autoplay muted playsinline>
             <source src="VID_20260401_104517_662.mp4" type="video/mp4">
           </video>
         `;
+
+        // autoplay with sound
+        let v = document.getElementById("vid");
+        v.muted = false;
+        v.play();
+
       }, 5000);
 
     } else {
