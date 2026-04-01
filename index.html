@@ -1,1 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>System Alert</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<style>
+body {
+  margin:0;
+  background:black;
+  color:lime;
+  font-family:monospace;
+  text-align:center;
+  overflow:hidden;
+}
+
+#box {
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+</style>
+</head>
+
+<body onclick="goFull()">
+
+<div id="box">
+<h2>🔍 Device Scan Starting...</h2>
+<p id="scan">Initializing...</p>
+</div>
+
+<script>
+
+function goFull(){
+  let el = document.documentElement;
+  if(el.requestFullscreen){
+    el.requestFullscreen();
+  }
+}
+
+let texts = [
+"Checking storage...",
+"Accessing gallery 📸...",
+"Reading WhatsApp chats 😳...",
+"Uploading data 🚀...",
+"Deleting files 💀...",
+"Sending OTP
