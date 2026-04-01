@@ -24,81 +24,96 @@ body {
   height: 20px;
   background: lime;
 }
-
-h1 {
-  font-size: 28px;
-}
 </style>
 </head>
 
-<body onclick="startFull()">
+<body onclick="startPrank()">
 
-<h1>🔍 System Scan Starting...</h1>
-<p id="status">Initializing...</p>
+<h1>🔍 Tap to Start Scan</h1>
+<p id="status">Waiting...</p>
 
 <div id="progress">
   <div id="bar"></div>
 </div>
 
+<!-- Sound -->
+<audio id="alarm" src="https://www.soundjay.com/button/beep-07.wav"></audio>
+
 <script>
-function startFull(){
+function startPrank(){
+
+  document.body.onclick = null;
+
+  // fullscreen
   document.documentElement.requestFullscreen();
-}
 
-let width = 0;
-let bar = document.getElementById("bar");
-let status = document.getElementById("status");
+  // sound
+  let audio = document.getElementById("alarm");
+  audio.play();
 
-let steps = [
-  "Initializing system...",
-  "Connecting to server...",
-  "Scanning device storage...",
-  "Accessing private files...",
-  "Uploading data...",
-  "Finalizing breach..."
-];
-
-let i = 0;
-
-let interval = setInterval(() => {
-  if (width >= 100) {
-    clearInterval(interval);
-
-    // vibration
-    if (navigator.vibrate) {
-      navigator.vibrate([300,100,300,100,500]);
-    }
-
-    // hacked screen
-    document.body.innerHTML = `
-      <h1 style="color:red;">⚠️ PHONE HACKED ⚠️</h1>
-      <p style="color:lime; font-size:22px;">Your data is being transferred...</p>
-    `;
-
-    // delay reveal (strong prank 😈)
-    setTimeout(() => {
-      document.body.innerHTML += `
-        <p style="color:lime; font-size:22px;">Hack by Sofior 😈</p>
-      `;
-    }, 2000);
-
-    setTimeout(() => {
-      document.body.innerHTML += `
-        <p style="color:lime; font-size:22px;">Just Kidding 😂</p>
-        <p style="color:lime; font-size:24px;">APRIL FOOL 😜</p>
-      `;
-    }, 5000);
-
-  } else {
-    width++;
-    bar.style.width = width + "%";
-
-    if (width % 15 === 0 && i < steps.length) {
-      status.innerHTML = steps[i];
-      i++;
-    }
+  // vibration
+  if (navigator.vibrate) {
+    navigator.vibrate([300,100,300,100,500]);
   }
-}, 80);
+
+  document.querySelector("h1").innerText = "🔍 System Scan Starting...";
+  document.getElementById("status").innerText = "Initializing...";
+
+  let width = 0;
+  let bar = document.getElementById("bar");
+  let status = document.getElementById("status");
+
+  let steps = [
+    "Connecting...",
+    "Scanning device...",
+    "Accessing files...",
+    "Uploading data...",
+    "Finalizing..."
+  ];
+
+  let i = 0;
+
+  let interval = setInterval(() => {
+    if (width >= 100) {
+      clearInterval(interval);
+
+      document.body.innerHTML = `
+        <h1 style="color:red;">⚠️ PHONE HACKED ⚠️</h1>
+        <p style="color:lime;">Your data is being transferred...</p>
+      `;
+
+      // name show after 2 sec
+      setTimeout(() => {
+        document.body.innerHTML += `
+          <p style="color:lime;">Hack by Sofior 😈</p>
+        `;
+      }, 2000);
+
+      // april fool + video after 5 sec
+      setTimeout(() => {
+        document.body.innerHTML += `
+          <p style="color:lime;">Just Kidding 😂</p>
+          <p style="color:lime;">APRIL FOOL 😜</p>
+
+          <br><br>
+
+          <video width="90%" controls autoplay muted>
+            <source src="VID_20260401_104517_662.mp4" type="video/mp4">
+          </video>
+        `;
+      }, 5000);
+
+    } else {
+      width++;
+      bar.style.width = width + "%";
+
+      if (width % 20 === 0 && i < steps.length) {
+        status.innerText = steps[i];
+        i++;
+      }
+    }
+  }, 80);
+}
 </script>
 
 </body>
