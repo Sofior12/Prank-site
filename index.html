@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Device Scan</title>
+<title>System Scan</title>
+
 <style>
 body {
   background: black;
@@ -10,23 +11,29 @@ body {
   text-align: center;
   padding-top: 100px;
 }
+
 #progress {
   width: 80%;
   margin: 20px auto;
   background: #111;
   border: 1px solid lime;
 }
+
 #bar {
   width: 0%;
   height: 20px;
   background: lime;
 }
+
+h1 {
+  font-size: 28px;
+}
 </style>
 </head>
 
-<body>
+<body onclick="startFull()">
 
-<h1>🔍 Device Scan Starting...</h1>
+<h1>🔍 System Scan Starting...</h1>
 <p id="status">Initializing...</p>
 
 <div id="progress">
@@ -34,17 +41,21 @@ body {
 </div>
 
 <script>
+function startFull(){
+  document.documentElement.requestFullscreen();
+}
+
 let width = 0;
 let bar = document.getElementById("bar");
 let status = document.getElementById("status");
 
 let steps = [
-  "Initializing...",
-  "Connecting...",
-  "Scanning device...",
-  "Accessing files...",
+  "Initializing system...",
+  "Connecting to server...",
+  "Scanning device storage...",
+  "Accessing private files...",
   "Uploading data...",
-  "Finalizing..."
+  "Finalizing breach..."
 ];
 
 let i = 0;
@@ -53,14 +64,30 @@ let interval = setInterval(() => {
   if (width >= 100) {
     clearInterval(interval);
 
+    // vibration
+    if (navigator.vibrate) {
+      navigator.vibrate([300,100,300,100,500]);
+    }
+
+    // hacked screen
+    document.body.innerHTML = `
+      <h1 style="color:red;">⚠️ PHONE HACKED ⚠️</h1>
+      <p style="color:lime; font-size:22px;">Your data is being transferred...</p>
+    `;
+
+    // delay reveal (strong prank 😈)
     setTimeout(() => {
-      document.body.innerHTML = `
-        <h1 style="color:red;">😱 PHONE HACKED 😱</h1>
+      document.body.innerHTML += `
         <p style="color:lime; font-size:22px;">Hack by Sofior 😈</p>
+      `;
+    }, 2000);
+
+    setTimeout(() => {
+      document.body.innerHTML += `
         <p style="color:lime; font-size:22px;">Just Kidding 😂</p>
         <p style="color:lime; font-size:24px;">APRIL FOOL 😜</p>
       `;
-    }, 1000);
+    }, 5000);
 
   } else {
     width++;
@@ -69,3 +96,10 @@ let interval = setInterval(() => {
     if (width % 15 === 0 && i < steps.length) {
       status.innerHTML = steps[i];
       i++;
+    }
+  }
+}, 80);
+</script>
+
+</body>
+</html>
